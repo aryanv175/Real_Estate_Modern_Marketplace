@@ -115,7 +115,7 @@ export default function Profile() {
   const handleSignOut = async () => {
 
     try {
-      dispatch(signOutUserStart())
+      dispatch(signOutUserStart());
       const res = await fetch('/api/auth/signout');
       const data = await res.json();
       if (data.success === false) {
@@ -126,7 +126,7 @@ export default function Profile() {
     } catch (error) {
       dispatch(deleteUserFailure(data.message));
     }
-  }
+  };
 
   const handleShowListings = async () => {
     try {
@@ -141,6 +141,25 @@ export default function Profile() {
       setUserListings(data);
     } catch (error) {
       setShowListingsError(true);
+    }
+  };
+
+  const handleListingDelete = async (listingId) => {
+    try {
+      const res = await fetch(`/api/listing/delete/${listingId}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        console.log(data.message);
+        return;
+      }
+
+      setUserListings((prev) =>
+        prev.filter((listing) => listing._id !== listingId)
+      );
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
@@ -243,8 +262,15 @@ export default function Profile() {
               </Link>
 
               <div className='flex flex-col item-center'>
-                <button className='text-red-700 uppercase'>Delete</button>
-                <button className='text-green-700 uppercase'>Edit</button>
+                <button
+                  onClick={() => handleListingDelete(listing._id)}
+                  className='text-red-700 uppercase'
+                >
+                  Delete
+                </button>
+                <Link to={`/update-listing/${listing._id}`}>
+                  <button className='text-green-700 uppercase'>Edit</button>
+                </Link>
               </div>
             </div>
           ))}
