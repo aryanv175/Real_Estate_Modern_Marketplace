@@ -23,26 +23,26 @@ export default function Header() {
     }
   }, [location.search]);
   return (
-    <header className='bg-teal-200 shadow-md'>
+    <header className='bg-yellow-500 shadow-md'>
     <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
         <Link to='/'>
             <h1 className='font-bold text-base sm:text-xl text-blue-700 flex flex-wrap'>
-                <span className='text-teal-500'>AYA</span>
-                <span className='text-blue-800'>Estate</span>
+                <span className='text-black'>AYA</span>
+                <span className='text-white'>Estate</span>
             </h1>
         </Link>
-        <form onSubmit={handleSubmit} className="bg-blue-100 p-3 rounded-lg flex items-center">
-            <input type="text" placeholder="Search..." className="bg-transparent px-2 py-1 rounded border focus:outline-none focus:ring focus-border-blue-300 w-24 sm:w-64" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
+        <form onSubmit={handleSubmit} className="bg-white shadow-md p-3 rounded-lg flex items-center">
+            <input type="text" placeholder="Search..." className="bg-transparent px-2 py-1 rounded border focus:outline-none focus:ring focus-border-white w-24 sm:w-64" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
             <button> 
-              <FaSearch className='text-blue-500' />
+              <FaSearch className='text-black' />
             </button> 
         </form>
         <ul className='flex gap-4'>
             <Link to='/'>
-                <li className='hidden sm:inline text-blue-700 hover:underline'>Home</li>
+                <li className='hidden sm:inline text-black-700 hover:underline'>Home</li>
             </Link>
             <Link to='/about'>
-                <li className='hidden sm:inline text-blue-700 hover:underline'>About</li>
+                <li className='hidden sm:inline text-black-700 hover:underline'>About</li>
             </Link>
             <Link to='/profile'>
             {currentUser ? (
