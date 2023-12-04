@@ -63,7 +63,7 @@ export default function Header() {
               > Profile </div>
             </Nav.Link>
           ) : (
-            <Nav.Link as={Link} to="/signin" className="text-purdue-gold">
+            <Nav.Link as={Link} to="/sign-in" className="text-purdue-gold">
               Sign in
             </Nav.Link>
           )}
