@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ListingItem from '../components/ListingItem';
 
@@ -127,10 +127,11 @@ export default function Search() {
     }
     setListings([...listings, ...data]);
   };
+
   return (
     <div className='flex flex-col md:flex-row'>
-      <div className='p-7  border-b-2 md:border-r-2 md:min-h-screen'>
-        <form onSubmit={handleSubmit} className='flex flex-col gap-8'>
+      <div className='bg-gray-200 p-4 md:w-72 md:min-h-screen'>
+        <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
           <div className='flex items-center gap-2'>
             <label className='whitespace-nowrap font-semibold'>
               Search Term:
@@ -139,75 +140,79 @@ export default function Search() {
               type='text'
               id='searchTerm'
               placeholder='Search...'
-              className='border rounded-lg p-3 w-full'
+              className='border rounded-lg p-2 w-full'
               value={sidebardata.searchTerm}
               onChange={handleChange}
             />
           </div>
-          <div className='flex gap-2 flex-wrap items-center'>
-            <label className='font-semibold'>Type:</label>
-            <div className='flex gap-2'>
-              <input
-                type='checkbox'
-                id='all'
-                className='w-5'
-                onChange={handleChange}
-                checked={sidebardata.type === 'all'}
-              />
-              <span>Rent & Sale</span>
-            </div>
-            <div className='flex gap-2'>
-              <input
-                type='checkbox'
-                id='rent'
-                className='w-5'
-                onChange={handleChange}
-                checked={sidebardata.type === 'rent'}
-              />
-              <span>Rent</span>
-            </div>
-            <div className='flex gap-2'>
-              <input
-                type='checkbox'
-                id='sale'
-                className='w-5'
-                onChange={handleChange}
-                checked={sidebardata.type === 'sale'}
-              />
-              <span>Sale</span>
-            </div>
-            <div className='flex gap-2'>
-              <input
-                type='checkbox'
-                id='offer'
-                className='w-5'
-                onChange={handleChange}
-                checked={sidebardata.offer}
-              />
-              <span>Offer</span>
+          <div className='flex flex-col gap-2'>
+            <span className='font-semibold'>Type:</span>
+            <div className='flex flex-col gap-2'>
+              <label>
+                <input
+                  type='radio'
+                  id='all'
+                  className='w-4 h-4'
+                  onChange={handleChange}
+                  checked={sidebardata.type === 'all'}
+                />
+                <span>Rent & Sale</span>
+              </label>
+              <label>
+                <input
+                  type='radio'
+                  id='rent'
+                  className='w-4 h-4'
+                  onChange={handleChange}
+                  checked={sidebardata.type === 'rent'}
+                />
+                <span>Rent</span>
+              </label>
+              <label>
+                <input
+                  type='radio'
+                  id='sale'
+                  className='w-4 h-4'
+                  onChange={handleChange}
+                  checked={sidebardata.type === 'sale'}
+                />
+                <span>Sale</span>
+              </label>
             </div>
           </div>
-          <div className='flex gap-2 flex-wrap items-center'>
-            <label className='font-semibold'>Amenities:</label>
-            <div className='flex gap-2'>
-              <input
-                type='checkbox'
-                id='parking'
-                className='w-5'
-                onChange={handleChange}
-                checked={sidebardata.parking}
-              />
-              <span>Parking</span>
-            </div>
-            <div className='flex gap-2'>
-              <input
-                type='checkbox'
-                id='furnished'
-                className='w-5'
-                onChange={handleChange}
-                checked={sidebardata.furnished}
-              />
-              <span>Furnished</span>
+          <div className='flex flex-col gap-2'>
+            <span className='font-semibold'>Amenities:</span>
+            <div className='flex flex-col gap-2'>
+              <label>
+                <input
+                  type='checkbox'
+                  id='parking'
+                  className='w-4 h-4'
+                  onChange={handleChange}
+                  checked={sidebardata.parking}
+                />
+                <span>Parking</span>
+              </label>
+              <label>
+                <input
+                  type='checkbox'
+                  id='furnished'
+                  className='w-4 h-4'
+                  onChange={handleChange}
+                  checked={sidebardata.furnished}
+                />
+                <span>Furnished</span>
+              </label>
+              <label>
+                <input
+                  type='checkbox'
+                  id='offer'
+                  className='w-4 h-4'
+                  onChange={handleChange}
+                  checked={sidebardata.offer}
+                />
+                <span>Offer</span>
+              </label>
             </div>
           </div>
           <div className='flex items-center gap-2'>
@@ -216,43 +221,43 @@ export default function Search() {
               onChange={handleChange}
               defaultValue={'created_at_desc'}
               id='sort_order'
-              className='border rounded-lg p-3'
+              className='border rounded-lg p-2'
             >
               <option value='regularPrice_desc'>Price high to low</option>
-              <option value='regularPrice_asc'>Price low to hight</option>
+              <option value='regularPrice_asc'>Price low to high</option>
               <option value='createdAt_desc'>Latest</option>
               <option value='createdAt_asc'>Oldest</option>
             </select>
           </div>
-          <button className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95'>
+          <button className='bg-slate-700 text-white p-2 rounded-lg hover:opacity-95'>
             Search
           </button>
         </form>
       </div>
       <div className='flex-1'>
-        <h1 className='text-3xl font-semibold border-b p-3 text-slate-700 mt-5'>
-          Listing results:
+        <h1 className='text-2xl font-semibold border-b p-4 text-slate-700 mt-5'>
+          Listing Results:
         </h1>
-        <div className='p-7 flex flex-wrap gap-4'>
+        <div className='p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
           {!loading && listings.length === 0 && (
-            <p className='text-xl text-slate-700'>No listing found!</p>
+            <p className='text-xl text-slate-700 col-span-3 text-center'>
+              No listings found!
+            </p>
           )}
           {loading && (
-            <p className='text-xl text-slate-700 text-center w-full'>
+            <p className='text-xl text-slate-700 text-center col-span-3'>
               Loading...
             </p>
           )}
-
           {!loading &&
             listings &&
             listings.map((listing) => (
               <ListingItem key={listing._id} listing={listing} />
             ))}
-
           {showMore && (
             <button
               onClick={onShowMoreClick}
-              className='text-green-700 hover:underline p-7 text-center w-full'
+              className='text-green-700 hover:underline p-4 text-center col-span-3'
             >
               Show more
             </button>

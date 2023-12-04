@@ -57,12 +57,10 @@ export default function Header() {
         <Nav className="ml-auto">
           {currentUser ? (
             <Nav.Link as={Link} to="/profile">
-              <img
-                className="rounded-full h-7 w-7 object-cover"
-                src={currentUser.avatar}
-                alt="profile"
+              <div
+                className="max-w-[200px] text-purdue-gold"
                 style={{ marginRight: '20px' }}
-              />
+              > Profile </div>
             </Nav.Link>
           ) : (
             <Nav.Link as={Link} to="/signin" className="text-purdue-gold">

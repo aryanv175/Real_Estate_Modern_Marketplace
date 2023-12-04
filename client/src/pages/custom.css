@@ -1,0 +1,65 @@
+/* custom.css */
+.text-purdue-gold {
+    color: #C28E0E; /* Purdue Gold color, adjust as needed */
+  }
+  
+  .bg-purdue-black {
+    background-color: #000000; /* Purdue Black color, adjust as needed */
+  }
+  
+  /* Add any other custom styling as needed */
+  .search-container {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .search-sidebar {
+    flex-basis: 30%;
+    padding: 1rem;
+  }
+  
+  .search-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .form-field {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .checkbox-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .search-button {
+    background-color: #007bff; /* Adjust color to match theme */
+    color: white;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+  }
+  
+  .search-results {
+    flex: 1;
+    padding: 1rem;
+  }
+  
+  .search-results h1 {
+    margin-bottom: 1rem;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .search-container {
+      flex-direction: column;
+    }
+    
+    .search-sidebar {
+      flex-basis: auto;
+    }
+  }
+  
