@@ -47,7 +47,7 @@ export default function Listing() {
         <p className='text-center my-7 text-2xl'>Something went wrong!</p>
       )}
       {listing && !loading && !error && (
-        <div className='flex flex-col items-center' style={{ marginTop: '50px' }}>
+        <div className='flex flex-col items-center' style={{ marginTop: '50px', margin: 'auto' }}>
           <Swiper navigation>
             {listing.imageUrls.map((url) => (
               <SwiperSlide key={url}>
