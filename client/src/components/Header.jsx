@@ -1,12 +1,16 @@
-import {FaSearch} from 'react-icons/fa'; 
+import { FaSearch } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+import './custom.css'; // Import your custom CSS
 
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams(window.location.search);
@@ -22,41 +26,51 @@ export default function Header() {
       setSearchTerm(searchTermFromUrl);
     }
   }, [location.search]);
+
   return (
-    <header className='bg-yellow-500 shadow-md'>
-    <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
-        <Link to='/'>
-            <h1 className='font-bold text-base sm:text-xl text-blue-700 flex flex-wrap'>
-                <span className='text-black'>AYA</span>
-                <span className='text-white'>Estate</span>
-            </h1>
-        </Link>
-        <form onSubmit={handleSubmit} className="bg-white shadow-md p-3 rounded-lg flex items-center">
-            <input type="text" placeholder="Search..." className="bg-transparent px-2 py-1 rounded border focus:outline-none focus:ring focus-border-white w-24 sm:w-64" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
-            <button> 
-              <FaSearch className='text-black' />
-            </button> 
-        </form>
-        <ul className='flex gap-4'>
-            <Link to='/'>
-                <li className='hidden sm:inline text-black-700 hover:underline'>Home</li>
-            </Link>
-            <Link to='/about'>
-                <li className='hidden sm:inline text-black-700 hover:underline'>About</li>
-            </Link>
-            <Link to='/profile'>
-            {currentUser ? (
+    <Navbar bg="purdue-black" variant="dark" expand="lg" className="shadow-md">
+      <Navbar.Brand as={Link} to="/" className="text-purdue-gold" style={{ fontWeight: 'bold' , marginLeft: '10px'}}>
+        AYA Estate
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="mr-auto">
+          <Nav.Link as={Link} to="/" className="text-purdue-gold" >
+            Home
+          </Nav.Link>
+          <Nav.Link as={Link} to="/about" className="text-purdue-gold">
+            About
+          </Nav.Link>
+        </Nav>
+        <Form inline onSubmit={handleSubmit} className="flex ml-3">
+          <FormControl
+            type="text"
+            placeholder="Search..."
+            className="mr-sm-2"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <Button variant="outline-light" type="submit">
+            <FaSearch />
+          </Button>
+        </Form>
+        <Nav className="ml-auto">
+          {currentUser ? (
+            <Nav.Link as={Link} to="/profile">
               <img
-                className='rounded-full h-7 w-7 object-cover'
+                className="rounded-full h-7 w-7 object-cover"
                 src={currentUser.avatar}
-                alt='profile'
+                alt="profile"
+                style={{ marginRight: '20px' }}
               />
-            ) : (
-              <li className=' text-slate-700 hover:underline'> Sign in</li>
-            )}
-          </Link>
-        </ul>
-    </div>
-    </header>
+            </Nav.Link>
+          ) : (
+            <Nav.Link as={Link} to="/signin" className="text-purdue-gold">
+              Sign in
+            </Nav.Link>
+          )}
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   );
 }
